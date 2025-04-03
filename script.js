@@ -46,9 +46,9 @@ function main() {
 
   respuestaCorrecta = Math.floor(respuestaCorrecta);
   arrayValores.push(respuestaCorrecta);
-  arrayValores.push(numeroAleatorio());
-  arrayValores.push(numeroAleatorio());
-  arrayValores.push(numeroAleatorio());
+  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25));
+  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25));
+  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25));
 
   let nuevoArray = seleccionarElementosAleatorios(
     arrayValores,
@@ -63,14 +63,8 @@ function main() {
   button4.innerHTML = nuevoArray[3];
 }
 
-
 function generarNumeroSimilar(base, variacion) {
-  return base + (Math.random() * (variacion * 2) - variacion);
-}
-
-
-function numeroAleatorio() {
-  return Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+  return Math.floor(base + (Math.random() * (variacion * 2) - variacion));
 }
 
 function numeroAleatorio() {
