@@ -85,13 +85,11 @@ const respuesta = document.getElementById("respuesta");
 function correcto() {
   main();
   return (respuesta.textContent = "Respuesta Correcta ✅");
-  console.log("Respuesta Correcta ✅");
 }
 
 function incorrecto() {
   main();
   return (respuesta.textContent = "Respuesta Incorrecta ❌");
-  console.log("Respuesta Incorrecta ❌");
 }
 
 main();
