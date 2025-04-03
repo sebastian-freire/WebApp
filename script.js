@@ -5,8 +5,10 @@ const button2 = document.getElementById("option2");
 const button3 = document.getElementById("option3");
 const button4 = document.getElementById("option4");
 
+const respuesta = document.getElementById("respuesta");
+const contador = document.getElementById("contador");
+
 document.querySelectorAll("button").forEach((button) => {
-  // button.id.innerHTML = `hola${button.id}`;
   button.addEventListener("click", (event) => {
     console.log(`Hiciste clic en el botón ${button.textContent} ${button.id}`);
     if (button.textContent == respuestaCorrecta) {
@@ -18,6 +20,7 @@ document.querySelectorAll("button").forEach((button) => {
 });
 
 let respuestaCorrecta = 0;
+let contadorRespuestas = 0;
 
 function main() {
   const num1 = numeroAleatorio();
@@ -35,6 +38,9 @@ function main() {
       operador = "-";
       break;
     case 2: //division
+      if (num1 < num2) {
+        [num1, num2] = [num2, num1];
+      }
       respuestaCorrecta = num1 / num2;
       operador = "/";
       break;
@@ -46,9 +52,9 @@ function main() {
 
   respuestaCorrecta = Math.floor(respuestaCorrecta);
   arrayValores.push(respuestaCorrecta);
-  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25));
-  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25));
-  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25));
+  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25, arrayValores));
+  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25, arrayValores));
+  arrayValores.push(generarNumeroSimilar(respuestaCorrecta, 25, arrayValores));
 
   let nuevoArray = seleccionarElementosAleatorios(
     arrayValores,
@@ -56,15 +62,21 @@ function main() {
   );
   console.log(respuestaCorrecta);
   console.log(nuevoArray);
-  operation.innerHTML = `${num1} ${operador} ${num2}:`;
-  button1.innerHTML = nuevoArray[0];
-  button2.innerHTML = nuevoArray[1];
-  button3.innerHTML = nuevoArray[2];
-  button4.innerHTML = nuevoArray[3];
+  operation.innerHTML = `${num1} <span> ${operador} </span> ${num2}:`;
+  button1.textContent = nuevoArray[0];
+  button2.textContent = nuevoArray[1];
+  button3.textContent = nuevoArray[2];
+  button4.textContent = nuevoArray[3];
 }
 
-function generarNumeroSimilar(base, variacion) {
-  return Math.floor(base + (Math.random() * (variacion * 2) - variacion));
+function generarNumeroSimilar(base, variacion, array) {
+  let numDev = Math.floor(base + (Math.random() * (variacion * 2) - variacion));
+  for (elemento of array) {
+    if (numDev === elemento) {
+      return generarNumeroSimilar(base, variacion, array);
+    }
+  }
+  return numDev;
 }
 
 function numeroAleatorio() {
@@ -80,15 +92,16 @@ function operadorAleatorio() {
   return num;
 }
 
-const respuesta = document.getElementById("respuesta");
-
 function correcto() {
   main();
+  contadorRespuestas++;
+  contador.textContent = `Cantidad de respuestas correctas: ${contadorRespuestas}`;
   return (respuesta.textContent = "Respuesta Correcta ✅");
 }
 
 function incorrecto() {
   main();
+  contador.textContent = `Cantidad de respuestas correctas: ${contadorRespuestas}`;
   return (respuesta.textContent = "Respuesta Incorrecta ❌");
 }
 
