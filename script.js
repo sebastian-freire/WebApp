@@ -23,8 +23,8 @@ let respuestaCorrecta = 0;
 let contadorRespuestas = 0;
 
 function main() {
-  const num1 = numeroAleatorio();
-  const num2 = numeroAleatorio();
+  let num1 = numeroAleatorio();
+  let num2 = numeroAleatorio();
   let operador = "";
   let arrayValores = [];
 
