@@ -46,7 +46,7 @@ function main() {
       break;
     case 3: //multiplicacion
       respuestaCorrecta = num1 * num2;
-      operador = "*";
+      operador = "x";
       break;
   }
 
@@ -73,6 +73,7 @@ function generarNumeroSimilar(base, variacion, array) {
   let numDev = Math.floor(base + (Math.random() * (variacion * 2) - variacion));
   for (elemento of array) {
     if (numDev === elemento) {
+      //Funcion recursiva que se llama si el numero generado ya estaba en la lista
       return generarNumeroSimilar(base, variacion, array);
     }
   }
