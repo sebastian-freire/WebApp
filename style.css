@@ -77,3 +77,27 @@ body {
   letter-spacing: 1px;
   text-shadow: 1px 1px 2px rgba(0, 123, 255, 0.2);
 }
+
+#contenedor4 {
+  padding: 15px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 220px;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.verde,
+.rojo {
+  padding: 8px;
+}
+
+.verde {
+  background-color: rgb(144, 245, 144);
+}
+
+.rojo {
+  background-color: rgb(250, 138, 138);
+}
