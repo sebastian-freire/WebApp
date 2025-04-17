@@ -154,6 +154,7 @@ function agregarAJson(objeto) {
 
 function resetJsonO(objeto) {
   (objeto.nombre = ""), (objeto.resultado = ""), (color = "");
+  
 }
 
 main();
