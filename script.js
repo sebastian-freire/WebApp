@@ -14,6 +14,13 @@ const buttons = document.querySelectorAll("#contenido-principal .btn"); // Selec
 const p1 = document.querySelector("#pregunta"); 
 const p2 = document.querySelector("#respuesta");
 let score = 0; // Variable para llevar el puntaje
+let scoreTotal = 0; // Variable para llevar el puntaje total
+
+obtenerContadorTotal().then((valor) => {
+  scoreTotal = valor;
+  document.querySelector("#puntajeTotal").textContent =
+    `Cantidad de respuestas correctas totales: ${scoreTotal}`;
+});
 
 function generarPregunta() {
 
@@ -47,6 +54,7 @@ function generarPregunta() {
             if (valor === cuentaRedondeada) {
               p2.textContent = "✅Correcto";
               score++; // Incrementar el puntaje
+              scoreTotal++; // Incrementar el puntaje total
             } else {
               p2.textContent = "❌Intenta de nuevo.";
             }
@@ -60,10 +68,16 @@ function generarPregunta() {
             
             agregarResultado(resultado).then(mostrarResultados);
 
-            // Actualizar el puntaje en la interfaz
+            actualizarContadorTotal(scoreTotal); // Actualizar el contador total en el servidor
+
+            // Actualizar el puntaje de esta sesión en la interfaz
             document.querySelector("#puntaje").textContent =
             `Cantidad de respuestas correctas de la sesión: ${score}`;
             
+          // Actualizar el puntaje total en la interfaz
+          document.querySelector("#puntajeTotal").textContent =
+            `Cantidad de respuestas correctas de la sesión: ${scoreTotal}`;
+
       
             // Nueva pregunta en cada clic
             setTimeout(() => {
@@ -133,14 +147,30 @@ async function reiniciarResultados() {
 
     mostrarResultados(); // Actualizar la lista de resultados en la interfaz
     score = 0; // Reiniciar el puntaje
+    scoreTotal = 0; // Reiniciar el puntaje total
     document.querySelector("#puntaje").textContent = "Cantidad de respuestas correctas de la sesión: 0";
+    document.querySelector("#puntajeTotal").textContent = "Cantidad de respuestas correctas de la sesión: 0";
 
   } catch (error) {
     console.error("Error al reiniciar historial:", error);
   }
 }
 
+// GET al servidor para obtener el contadorTotal al cargar la página
+async function obtenerContadorTotal() {
+  const response = await fetch('http://localhost:3000/contadorTotal');
+  const data = await response.json();
+  return data.valor; 
+}
 
+// PUT al servidor para actualizar el contadorTotal
+async function actualizarContadorTotal(nuevoValor) {
+  await fetch('http://localhost:3000/contadorTotal', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: 1, valor: nuevoValor })
+  });
+}
 
 
 generarPregunta();

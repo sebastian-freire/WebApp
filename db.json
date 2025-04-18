@@ -1,94 +1,32 @@
 {
   "resultados": [
     {
-      "id": "5d37",
-      "cuenta": "32 + 14",
+      "id": "438c",
+      "cuenta": "85 - 32",
       "respuesta": 46,
+      "color": "Red"
+    },
+    {
+      "id": "de88",
+      "cuenta": "95 - 23",
+      "respuesta": 72,
       "color": "Green"
     },
     {
-      "id": "a183",
-      "cuenta": "100 + 92",
-      "respuesta": 192,
+      "id": "bbc3",
+      "cuenta": "28 - 13",
+      "respuesta": 15,
       "color": "Green"
     },
     {
-      "id": "af3d",
-      "cuenta": "38 - 84",
-      "respuesta": -46,
-      "color": "Green"
-    },
-    {
-      "id": "3b29",
-      "cuenta": "69 / 15",
-      "respuesta": 4,
-      "color": "Red"
-    },
-    {
-      "id": "b95a",
-      "cuenta": "50 / 11",
-      "respuesta": 4,
-      "color": "Red"
-    },
-    {
-      "id": "b452",
-      "cuenta": "14 * 56",
-      "respuesta": 195,
-      "color": "Red"
-    },
-    {
-      "id": "2f5e",
-      "cuenta": "40 + 17",
-      "respuesta": 57,
-      "color": "Green"
-    },
-    {
-      "id": "1fd1",
-      "cuenta": "55 / 63",
-      "respuesta": 0.87,
-      "color": "Green"
-    },
-    {
-      "id": "692b",
-      "cuenta": "49 * 56",
-      "respuesta": 158,
-      "color": "Red"
-    },
-    {
-      "id": "d765",
-      "cuenta": "71 + 86",
-      "respuesta": 69,
-      "color": "Red"
-    },
-    {
-      "id": "bdf7",
-      "cuenta": "79 / 81",
-      "respuesta": 150,
-      "color": "Red"
-    },
-    {
-      "id": "0ebd",
-      "cuenta": "91 * 31",
-      "respuesta": 2821,
-      "color": "Green"
-    },
-    {
-      "id": "1b90",
-      "cuenta": "83 - 29",
-      "respuesta": 98,
-      "color": "Red"
-    },
-    {
-      "id": "c46d",
-      "cuenta": "32 * 53",
-      "respuesta": 145,
-      "color": "Red"
-    },
-    {
-      "id": "f66e",
-      "cuenta": "16 * 2",
-      "respuesta": 32,
+      "id": "d3e7",
+      "cuenta": "29 - 90",
+      "respuesta": -61,
       "color": "Green"
     }
-  ]
+  ],
+  "contadorTotal": {
+    "id": 1,
+    "valor": 3
+  }
 }
