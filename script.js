@@ -161,8 +161,6 @@ async function agregarAJson(objeto) {
       body: JSON.stringify(objeto)
     });
     if (!res.ok) throw new Error("Error al agregar post");
-    const data = await res.json();
-    console.log("Post agregado:", data);
   } catch (err) {
     console.error(err);
   }
