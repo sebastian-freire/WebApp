@@ -76,7 +76,7 @@ function generarPregunta() {
             
           // Actualizar el puntaje total en la interfaz
           document.querySelector("#puntajeTotal").textContent =
-            `Cantidad de respuestas correctas de la sesión: ${scoreTotal}`;
+            `Cantidad de respuestas correctas totales: ${scoreTotal}`;
 
       
             // Nueva pregunta en cada clic
@@ -149,7 +149,7 @@ async function reiniciarResultados() {
     score = 0; // Reiniciar el puntaje
     scoreTotal = 0; // Reiniciar el puntaje total
     document.querySelector("#puntaje").textContent = "Cantidad de respuestas correctas de la sesión: 0";
-    document.querySelector("#puntajeTotal").textContent = "Cantidad de respuestas correctas de la sesión: 0";
+    document.querySelector("#puntajeTotal").textContent = "Cantidad de respuestas correctas totales: 0";
 
   } catch (error) {
     console.error("Error al reiniciar historial:", error);
