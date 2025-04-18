@@ -1,3 +1,5 @@
+//json-server --watch datos.json --port 3000
+
 const operation = document.getElementById("operation");
 
 const button1 = document.getElementById("option1");
@@ -122,34 +124,48 @@ function respuestaBoton(resultado) {
   return (respuesta.textContent = "Respuesta Incorrecta ❌");
 }
 
-function leerDatos() {
-  let datos = JSON.parse(localStorage.getItem("datos")) || [];
+async function leerDatos() {
+  try {
+    const res = await fetch("http://localhost:3000/datos");
+    if (!res.ok) throw new Error("Error al cargar datos");
+    const datos = await res.json();
+    console.log(datos);
 
-  contenedor.innerHTML = "";
+    contenedor.innerHTML = "";
 
-  datos
-    .slice()
-    .reverse()
-    .forEach((dato) => {
-      const div = document.createElement("div");
-      if (dato.color === "Green") {
-        div.className = "contenedor verde";
-      } else {
-        div.className = "contenedor rojo";
-      }
-      div.textContent = `${dato.cuenta} = ${dato.resultado}`;
-      contenedor.appendChild(div);
-    });
+    datos
+      .slice()
+      .reverse()
+      .forEach((dato) => {
+        const div = document.createElement("div");
+        if (dato.color === "Green") {
+          div.className = "contenedor verde";
+        } else {
+          div.className = "contenedor rojo";
+        }
+        div.textContent = `${dato.cuenta} = ${dato.resultado}`;
+        contenedor.appendChild(div);
+      });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-function agregarAJson(objeto) {
-  let datos = JSON.parse(localStorage.getItem("datos")) || [];
-
-  console.log(datos);
-
-  datos.push(objeto);
-
-  localStorage.setItem("datos", JSON.stringify(datos));
+async function agregarAJson(objeto) {
+  try {
+    const res = await fetch("http://localhost:3000/datos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(objeto)
+    });
+    if (!res.ok) throw new Error("Error al agregar post");
+    const data = await res.json();
+    console.log("Post agregado:", data);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function resetJsonO(objeto) {
