@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Operaciones aritmeticas</title>
-    <script src="script.js" defer></script>
+    <script defer src="script.js"></script>
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div>
-      <div id="contenedor1" class="contenedor">
-        <h1 class="titulo">Operaciones aritméticas:</h1>
+</head>
+<body>
+  <div id="layout">
+    <!-- Panel lateral izquierdo -->
+    <div id="contenedor-lateral">
+      <p id="puntaje">Cantidad de respuestas correctas de la sesión: 0</p>
+      <button id="btn-reiniciar" class="btn-borrar">🗑️ Borrar historial</button>
+      <div id="contenedor-historial"></div>
+    </div>
+
+    <!-- Contenido central -->
+    <div id="contenido-principal">
+      <div class="contenedor titulo">Operaciones aritméticas:</div>
+      <div class="contenedor">
+        <p id="pregunta" class="operation"></p>
       </div>
       <div class="contenedor">
-        <p id="operation"></p>
-        <button id="option1" class="btn"></button>
-        <button id="option2" class="btn"></button>
-        <button id="option3" class="btn"></button>
-        <button id="option4" class="btn"></button>
+        <button id="boton1" class="btn"></button>
+        <button id="boton2" class="btn"></button>
+        <button id="boton3" class="btn"></button>
+        <button id="boton4" class="btn"></button>
       </div>
-      <div id="contenedor3" class="contenedor">
-        <p id="respuesta">Haga 'Click' en los botones para dar su respuesta!</p>
-        <p id="contador">Cantidad de respuestas correctas de la sesión: 0</p>
+      <div class="contenedor" id="respuesta-contenedor">
+        <p id="respuesta"></p>
       </div>
     </div>
-    <div id="contenedor4" class="contenedor"></div>
-  </body>
+  </div>
+</body>
+
 </html>
