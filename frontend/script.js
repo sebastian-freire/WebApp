@@ -18,8 +18,8 @@ let objetoJson = {
   color: ""
 };
 
-document.querySelectorAll("button").forEach((button) => {
-  button.addEventListener("click", (event) => {
+document.querySelectorAll(".boton-respuesta").forEach((button) => {
+  button.addEventListener("click", () => {
     console.log(`Hiciste clic en el botón ${button.textContent} ${button.id}`);
     objetoJson.resultado = button.textContent;
 
@@ -31,8 +31,10 @@ document.querySelectorAll("button").forEach((button) => {
       objetoJson.color = "Red";
     }
 
-    agregarAJson(objetoJson);
     respuestaBoton(bool);
+    agregarAJson(objetoJson);
+    leerDatosDirectos(objetoJson);
+    main();
   });
 });
 
@@ -86,8 +88,6 @@ function main() {
   button2.textContent = nuevoArray[1];
   button3.textContent = nuevoArray[2];
   button4.textContent = nuevoArray[3];
-
-  leerDatos();
 }
 
 function generarNumeroSimilar(base, variacion, array) {
@@ -114,8 +114,6 @@ function operadorAleatorio() {
 }
 
 function respuestaBoton(resultado) {
-  main();
-
   if (resultado) {
     contadorRespuestas++;
     contador.textContent = `Cantidad de respuestas correctas de la sesión: ${contadorRespuestas}`;
@@ -124,31 +122,15 @@ function respuestaBoton(resultado) {
   return (respuesta.textContent = "Respuesta Incorrecta ❌");
 }
 
-async function leerDatos() {
-  try {
-    const res = await fetch("http://localhost:3000/datos");
-    if (!res.ok) throw new Error("Error al cargar datos");
-    const datos = await res.json();
-    console.log(datos);
-
-    contenedor.innerHTML = "";
-
-    datos
-      .slice()
-      .reverse()
-      .forEach((dato) => {
-        const div = document.createElement("div");
-        if (dato.color === "Green") {
-          div.className = "contenedor verde";
-        } else {
-          div.className = "contenedor rojo";
-        }
-        div.textContent = `${dato.cuenta} = ${dato.resultado}`;
-        contenedor.appendChild(div);
-      });
-  } catch (err) {
-    console.error(err);
+function leerDatosDirectos(objeto) {
+  const div = document.createElement("div");
+  if (objeto.color === "Green") {
+    div.className = "contenedor verde";
+  } else {
+    div.className = "contenedor rojo";
   }
+  div.textContent = `${objeto.cuenta} = ${objeto.resultado}`;
+  contenedor.prepend(div);
 }
 
 async function agregarAJson(objeto) {
@@ -164,10 +146,66 @@ async function agregarAJson(objeto) {
   } catch (err) {
     console.error(err);
   }
+
+  leerDatos();
 }
 
-function resetJsonO(objeto) {
-  (objeto.nombre = ""), (objeto.resultado = ""), (color = "");
+async function eliminarDeJson(id) {
+  try {
+    const res = await fetch(`http://localHost:3000/datos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    if (!res.ok) throw new Error("Error al eliminar dato");
+  } catch (err) {
+    console.error(err);
+  }
+
+  leerDatos();
+}
+
+async function leerDatos() {
+  try {
+    const res = await fetch("http://localhost:3000/datos");
+    if (!res.ok) throw new Error("Error al cargar datos");
+    const datos = await res.json();
+
+    contenedor.innerHTML = "";
+
+    datos
+      .slice()
+      .reverse()
+      .forEach((dato) => {
+        const divGrande = document.createElement("div");
+        divGrande.className = "contenedor";
+        const div = document.createElement("div");
+        if (dato.color === "Green") {
+          div.className = "contenedor verde";
+        } else {
+          div.className = "contenedor rojo";
+        }
+        div.textContent = `${dato.cuenta} = ${dato.resultado}`;
+
+        const bot = document.createElement("button");
+        bot.className = "boton-eliminar";
+        bot.value = dato.id;
+        bot.textContent = "Eliminar";
+        contenedor.appendChild(divGrande);
+        divGrande.appendChild(div);
+        divGrande.appendChild(bot);
+      });
+    document.querySelectorAll(".boton-eliminar").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const id = e.target.value;
+        eliminarDeJson(id);
+      });
+    });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 main();
+leerDatos();
